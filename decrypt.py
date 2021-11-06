@@ -6,7 +6,7 @@ import base64
 
 def xor(a, b):
     xored = []
-    for i in range(max(len(a), len(b))):
+    for i in range(len(a)):
         xored_value = a[i%len(a)] ^ b[i%len(b)]
         xored.append(chr(xored_value))
     return ''.join(xored)
