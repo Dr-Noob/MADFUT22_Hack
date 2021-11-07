@@ -33,10 +33,13 @@ xor_key = bytearray([0x46, 0x64, 0x4b])
 for line in input_f:
     if regex_item.match(line):
         m = re.search(regex_item, line)
-        sys.stdout.write("    <string name=\"")
-        sys.stdout.write(base64.b64encode(str.encode(xor(str.encode(m.group(1)), xor_key))).decode("utf-8"))
-        sys.stdout.write("\">")
-        sys.stdout.write(base64.b64encode(str.encode(xor(str.encode(m.group(2)), xor_key))).decode("utf-8"))
-        sys.stdout.write("</string>\n")
+        if(m.group(1) == "NQYoARYkMxQ4"):
+            sys.stdout.write(line)
+        else:
+            sys.stdout.write("    <string name=\"")
+            sys.stdout.write(base64.b64encode(str.encode(xor(str.encode(m.group(1)), xor_key))).decode("utf-8"))
+            sys.stdout.write("\">")
+            sys.stdout.write(base64.b64encode(str.encode(xor(str.encode(m.group(2)), xor_key))).decode("utf-8"))
+            sys.stdout.write("</string>\n")
 
 sys.stdout.write("</map>\n")
