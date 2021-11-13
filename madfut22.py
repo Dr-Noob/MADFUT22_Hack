@@ -19,6 +19,12 @@ def get_ids_cracked():
         print ('ERROR: File ids.txt does not exist')
         sys.exit(1)
 
+    try:
+        input_ftotw = open('ids_totw.txt','r')
+    except FileNotFoundError:
+        print ('ERROR: File ids_totw.txt does not exist')
+        sys.exit(1)
+
     # 1: valencia, 2: buffon, 3: motta, 4: vardy86, 5: vardy92, 6: vardy95, 7: batistuta, 8: silva92, 9: silva93, 10: silva95
     extra = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 
@@ -26,14 +32,19 @@ def get_ids_cracked():
     for id in extra:
       id_str += '"id'
       id_str += str(id).zfill(3)
-      id_str += '":0,'
-
-    print(id_str)
+      id_str += '":100,'
 
     for line in input_f:
         id_str += '"id'
         id_str += str(line[:-1])
-        id_str += '":0,'
+        id_str += '":100,'
+
+    # In MADFUT22, FUTCHAMP TOTW always end in 00
+    for line in input_ftotw:
+        id_str += '"id'
+        id_str += str(line[:-1])
+        id_str += '00'
+        id_str += '":100,'
 
     id_str = id_str[:-1]
     id_str += '}'
