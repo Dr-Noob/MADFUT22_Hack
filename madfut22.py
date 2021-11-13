@@ -27,12 +27,19 @@ def get_ids_cracked():
 
     # 1: valencia, 2: buffon, 3: motta, 4: vardy86, 5: vardy92, 6: vardy95, 7: batistuta, 8: silva92, 9: silva93, 10: silva95
     extra = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    # WTF? They are using a old id for Wijnaldum OTW
+    special = np.array([50512939])
 
     id_str = '{'
     for id in extra:
-      id_str += '"id'
-      id_str += str(id).zfill(3)
-      id_str += '":100,'
+        id_str += '"id'
+        id_str += str(id).zfill(3)
+        id_str += '":100,'
+
+    for id in special:
+        id_str += '"id'
+        id_str += str(id)
+        id_str += '":100,'
 
     for line in input_f:
         id_str += '"id'
