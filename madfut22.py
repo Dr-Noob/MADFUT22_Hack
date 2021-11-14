@@ -17,13 +17,13 @@ def xor(a, b):
 
 def get_ids_cracked():
     try:
-        input_f = open('ids.txt','r')
+        input_f = open('ids/ids.txt','r')
     except FileNotFoundError:
         eprint('ERROR: File ids.txt does not exist')
         sys.exit(1)
 
     try:
-        input_ftotw = open('ids_totw.txt','r')
+        input_ftotw = open('ids/ids_totw.txt','r')
     except FileNotFoundError:
         eprint('ERROR: File ids_totw.txt does not exist')
         sys.exit(1)
