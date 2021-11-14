@@ -67,6 +67,12 @@ def crack_players():
     sys.stdout.write(base64.b64encode(str.encode(xor(str.encode(ids), xor_key))).decode("utf-8"))
     sys.stdout.write('</string>\n')
 
+def crack_coins():
+    coins = '100000000'
+    sys.stdout.write('    <string name="JQsiKBc=">')
+    sys.stdout.write(base64.b64encode(str.encode(xor(str.encode(coins), xor_key))).decode("utf-8"))
+    sys.stdout.write('</string>\n')
+
 if(len(sys.argv) != 2):
     eprint("ERROR: Need one arg")
     eprint("Use:",sys.argv[0],"file")
@@ -78,7 +84,8 @@ except FileNotFoundError:
     eprint("ERROR: File '",sys.argv[1],"' does not exist")
     sys.exit(1)
 
-regex_item = re.compile(r'\s*<string\s+name="LwA4">.*')
+regex_ids = re.compile(r'\s*<string\s+name="LwA4">.*')
+regex_coins = re.compile(r'\s*<string\s+name="JQsiKBc=">.*')
 regex_end = re.compile(r'</map>')
 found = False
 
@@ -86,9 +93,11 @@ found = False
 xor_key = bytearray([0x46, 0x64, 0x4b])
 
 for line in input_f:
-    if regex_item.match(line):
+    if regex_ids.match(line):
         found = True
         crack_players()
+    elif regex_coins.match(line):
+        crack_coins()
     elif regex_end.match(line) and not found:
         crack_players()
         sys.stdout.write(line)
