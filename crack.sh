@@ -31,4 +31,4 @@ fi
 # 4. Copy cracked xml to the phone
 adb push Cracked.xml /storage/emulated/0/ && adb shell "su -c mv /storage/emulated/0/Cracked.xml /data/data/com.madfut.madfut22/shared_prefs/MainActivity.xml" && adb shell "su -c chown $auser:$auser /data/data/com.madfut.madfut22/shared_prefs/MainActivity.xml"
 
-echo "$0: Cracked successfully!"
+echo -e "\033[0;32m""$0: Cracked successfully!""\033[0m"
