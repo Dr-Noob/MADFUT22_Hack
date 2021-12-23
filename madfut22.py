@@ -17,13 +17,13 @@ def xor(a, b):
 
 def get_ids_cracked():
     try:
-        input_f = open('ids/ids.txt','r')
+        ids = np.loadtxt('ids/ids.txt', dtype=str)
     except FileNotFoundError:
         eprint('ERROR: File ids.txt does not exist')
         sys.exit(1)
 
     try:
-        input_ftotw = open('ids/ids_totw.txt','r')
+        ids_totw = np.loadtxt('ids/ids_totw.txt', dtype=str)
     except FileNotFoundError:
         eprint('ERROR: File ids_totw.txt does not exist')
         sys.exit(1)
@@ -36,26 +36,14 @@ def get_ids_cracked():
 
     id_str = '{'
     for id in extra:
-        id_str += '"id'
-        id_str += str(id).zfill(3)
-        id_str += '":100,'
+        id_str += '"id' + str(id).zfill(3) + '":100,'
 
-    for id in special:
-        id_str += '"id'
-        id_str += str(id)
-        id_str += '":100,'
-
-    for line in input_f:
-        id_str += '"id'
-        id_str += str(line[:-1])
-        id_str += '":100,'
+    for i, line in np.ndenumerate(ids):
+        id_str += '"id' + line + '":100,'
 
     # In MADFUT22, FUTCHAMP TOTW always end in 00
-    for line in input_ftotw:
-        id_str += '"id'
-        id_str += str(line[:-1])
-        id_str += '00'
-        id_str += '":100,'
+    for i, line in np.ndenumerate(ids_totw):
+        id_str += '"id' + line + '00' + '":100,'
 
     id_str = id_str[:-1]
     id_str += '}'
