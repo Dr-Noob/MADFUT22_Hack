@@ -20,7 +20,7 @@ function scrap_ids() {
   done
 }
 
-rm -i ids.txt ids_totw.txt
+rm -f ids.txt ids_totw.txt
 
 out="ids.txt"
 type=""

@@ -29,10 +29,21 @@ def get_ids_cracked():
         sys.exit(1)
 
     # 1: valencia, 2: buffon, 3: motta, 4: vardy86, 5: vardy92, 6: vardy95, 7: batistuta, 8: silva92, 9: silva93, 10: silva95
-    # 11-13: robben
-    extra = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
-    # WTF? They are using a old id for Wijnaldum OTW
-    special = np.array([50512939])
+    # 11-13: robben, 14: alonso
+    extra = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14])
+
+    # Strange IDs (they are not fetched from .txt):
+    # Wijnaldum OTW
+    # Taarabt Winter Wildcard
+    # Barella TOTW 87
+    # Pereyra Versus ice
+    # Everton Versus fire
+    # Nkunku UCL TOTT
+    # Galeno UEL TOTT
+    # Salah TOTT
+    ids = np.append(ids, [50512939, 67288469, 100887528, 67301925, 100886012, 168004571, 84125562, 134427059])
+    # Add TOTW to ids_totw to get FUTCHAMP TOTW too
+    ids_totw = np.append(ids_totw, [100887528])
 
     id_str = '{'
     for id in extra:
