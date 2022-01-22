@@ -85,6 +85,18 @@ def crack_coins():
     sys.stdout.write(base64.b64encode(str.encode(xor(str.encode(coins), xor_key))).decode("utf-8"))
     sys.stdout.write('</string>\n')
 
+def crack_ltm():
+    ltm_points = '100000'
+    sys.stdout.write('    <string name="KhAmFgsiKBA4">')
+    sys.stdout.write(base64.b64encode(str.encode(xor(str.encode(ltm_points), xor_key))).decode("utf-8"))
+    sys.stdout.write('</string>\n')
+
+def crack_picks():
+    hacker_pick = '[{"id":"pp_new_special","name":"HACKER PICK","descriptionText":"5 Guaranteed new special cards (no rating range). Courtesy of DrNoob","cover":"pp_cover_new_special","price":200000,"type":"new","logic":{"numCards":5,"newProb":100.0,"newSpecialProb":100.0,"newSpecialRatings":[{"maxRating":99,"minRating":64,"prob":100.0}],"newStandardRatings":[{"maxRating":99,"minRating":64,"prob":100.0}],"oldSpecialProb":75.0,"oldSpecialRatings":[{"maxRating":99,"minRating":64,"prob":100.0}],"oldStandardRatings":[{"maxRating":99,"minRating":64,"prob":100.0}],"packableOnly":false,"color":"rare_gold","colorNewRatings":[],"colorOldRatings":[],"ids":[]},"startTime":-1,"expireTime":-1,"numAvailable":100,"orderPriority":24,"isTradable2":true}]'
+    sys.stdout.write('    <string name="NQU9IwAbKgUyIxYbLwcgNQ==">')
+    sys.stdout.write(base64.b64encode(str.encode(xor(str.encode(hacker_pick), xor_key))).decode("utf-8"))
+    sys.stdout.write('</string>\n')
+
 if(len(sys.argv) != 2):
     eprint("ERROR: Need one arg")
     eprint("Use:",sys.argv[0],"file")
@@ -98,20 +110,32 @@ except FileNotFoundError:
 
 regex_ids = re.compile(r'\s*<string\s+name="LwA4">.*')
 regex_coins = re.compile(r'\s*<string\s+name="JQsiKBc=">.*')
+regex_ltm = re.compile(r'\s*<string\s+name="KhAmFgsiKBA4">.*')
+regex_picks = re.compile(r'\s*<string\s+name="NQU9IwAbKgUyIxYbLwcgNQ==">.*')
 regex_end = re.compile(r'</map>')
-found = False
+foundp = False
+foundl = False
 
 # XOR key is 0x46644b
 xor_key = bytearray([0x46, 0x64, 0x4b])
 
 for line in input_f:
     if regex_ids.match(line):
-        found = True
+        foundp = True
         crack_players()
     elif regex_coins.match(line):
         crack_coins()
-    elif regex_end.match(line) and not found:
-        crack_players()
-        sys.stdout.write(line)
+    elif regex_ltm.match(line):
+        foundl = True
+        crack_ltm()
+    #elif regex_picks.match(line):
+    #    crack_picks()
+    elif regex_end.match(line):
+        if not foundp:
+            crack_players()
+            sys.stdout.write(line)
+        if not foundl:
+            crack_ltm()
+            sys.stdout.write(line)
     else:
         sys.stdout.write(line)
