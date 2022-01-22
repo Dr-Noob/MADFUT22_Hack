@@ -29,8 +29,8 @@ def get_ids_cracked():
         sys.exit(1)
 
     # 1: valencia, 2: buffon, 3: motta, 4: vardy86, 5: vardy92, 6: vardy95, 7: batistuta, 8: silva92, 9: silva93, 10: silva95
-    # 11-13: robben, 14: alonso
-    extra = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14])
+    # 11-13: robben, 14: alonso, 15-17: modric, 18-20: rivellino
+    extra = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20])
 
     # Strange IDs (they are not fetched from .txt):
     # Wijnaldum OTW
@@ -38,10 +38,22 @@ def get_ids_cracked():
     # Barella TOTW 87
     # Pereyra Versus ice
     # Everton Versus fire
-    # Nkunku UCL TOTT
     # Galeno UEL TOTT
-    # Salah TOTT
-    ids = np.append(ids, [50512939, 67288469, 100887528, 67301925, 100886012, 168004571, 84125562, 134427059])
+    # Nkunku
+    # Simeone
+    # Ramsdale
+    # Theate
+    # Payet
+    # Orsolini
+    # Alexander-Arnold POTM
+    # Laborde POTM
+    # Mbappe headliner
+    # Salah headliner
+    # Rafa TOTW
+    # Kokcu TOTW
+    # Song Wenjie TOTW Silver
+    # Brobbey TOTW Silver
+    ids = np.append(ids, [50512939, 67288469, 100887528, 67301925, 100886012, 84125562, 184781787, 100880112, 100897230, 100920574, 67286252, 67342420, 100894577, 134427247, 117672259, 151204275, 84102627, 67352109, 50563906, 67360674])
     # Add TOTW to ids_totw to get FUTCHAMP TOTW too
     ids_totw = np.append(ids_totw, [100887528])
 
