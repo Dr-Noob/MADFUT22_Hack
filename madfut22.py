@@ -80,7 +80,7 @@ def crack_players():
     sys.stdout.write('</string>\n')
 
 def crack_coins():
-    coins = '100000000'
+    coins = '2100000000'
     sys.stdout.write('    <string name="JQsiKBc=">')
     sys.stdout.write(base64.b64encode(str.encode(xor(str.encode(coins), xor_key))).decode("utf-8"))
     sys.stdout.write('</string>\n')
